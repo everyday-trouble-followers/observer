@@ -1,7 +1,7 @@
-# common
+### common
 variable "basename" {}
 
-# network
+### network
 variable "vpc_cidr_block" {
   type        = string
   description = "vpc cidr block size."
