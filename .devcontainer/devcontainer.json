@@ -11,12 +11,14 @@
 	},
 	// Set *default* container specific settings.json values on container create. 
 	"settings": {
-		"terminal.integrated.shell.linux": "/bin/ash"
+		"terminal.integrated.shell.linux": "/bin/ash",
+		"editor.tabSize": 2,
+		"editor.formatOnSave": true
 	},
 	"containerEnv": {
-		"AWS_ACCESS_KEY_ID": "${localEnv:AWS_ACCESS_KEY_ID}",
-		"AWS_DEFAULT_REGION": "${localEnv:AWS_DEFAULT_REGION}",
-		"AWS_SECRET_ACCESS_KEY": "${localEnv:AWS_SECRET_ACCESS_KEY}"
+		"TF_VAR_aws_access_key_id": "${localEnv:AWS_ACCESS_KEY_ID}",
+		"TF_VAR_aws_secret_access_key": "${localEnv:AWS_SECRET_ACCESS_KEY}",
+		"TF_VAR_aws_default_region": "${localEnv:AWS_DEFAULT_REGION}"
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	// Note that some extensions may not work in Alpine Linux. See https://aka.ms/vscode-remote/linux.
