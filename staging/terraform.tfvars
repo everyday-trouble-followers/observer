@@ -14,6 +14,7 @@ ingress_management_ports = {
   "ssh" : 22,
   "http" : 80,
   "https" : 443,
+  "kibana": 5601
 }
 # ingress_management_cidr_blocks is set to ip.tfvars
 ingress_function_ports = {
@@ -49,14 +50,14 @@ volume_size_apm = 15
 elastic_version = "7.10.2"
 
 ## kibana
-kibana_server_port = 80
+kibana_server_port = 5601
 kibana_server_host = "0.0.0.0"
 kibana_server_name = "kibana"
 
 ## elasticsearch
 elasticsearch_jvm_Xms = "4g"
 elasticsearch_jvm_Xmx = "4g"
-elasticsearch_node_name = "$${HOSTNAME}"
+#elasticsearch_node_name = "$${HOSTNAME}"
 elasticsearch_network_host = [ "0.0.0.0" ]
 elasticsearch_http_port = 9200
 

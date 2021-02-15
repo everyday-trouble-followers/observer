@@ -18,3 +18,10 @@ output "ssh-apm" {
     "ssh -i ${module.key_pair.private_key_file} ec2-user@${dns}"
   ]
 }
+
+output "kibana-login" {
+  value = [
+    for dns in module.ec2.kibana_public_dns :
+    "http://${dns}:5601"
+  ]
+}
