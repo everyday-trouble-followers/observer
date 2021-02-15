@@ -61,7 +61,7 @@ variable "kibana_server_name" {}
 ## elasticsearch
 variable "elasticsearch_jvm_Xms" {}
 variable "elasticsearch_jvm_Xmx" {}
-variable "elasticsearch_node_name" {}
+#variable "elasticsearch_node_name" {}
 variable "elasticsearch_network_host" {}
 variable "elasticsearch_http_port" {}
 

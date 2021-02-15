@@ -14,3 +14,9 @@ runcmd:
   - sed -i -e '/output.elasticsearch:/,/  hosts:.*/ s/  hosts:.*/  hosts:\ ${apm_output_elasticsearch_hosts}/' /etc/apm-server/apm-server.yml > /dev/null
   - systemctl start apm-server
   - systemctl enable apm-server
+
+power_state:
+  delay: "+7"
+  mode: reboot
+  message: Bye Bye
+  timeout: 30

@@ -30,7 +30,7 @@ resource "aws_instance" "elasticsearch" {
   vpc_security_group_ids = var.security_group_ids_elasticsearch
   key_name               = var.key_name
   subnet_id              = var.subnet_id_elasticsearch
-  user_data              = data.template_file.user_data_elasticsearch.rendered
+  user_data              = data.template_file.user_data_elasticsearch[each.key].rendered
 
   root_block_device {
     volume_type = "gp2"
@@ -112,19 +112,20 @@ data "template_file" "user_data_kibana" {
     kibana_server_port         = tostring(var.kibana_server_port)
     kibana_server_host         = var.kibana_server_host
     kibana_server_name         = var.kibana_server_name
-    kibana_elasticsearch_hosts = "[ ${join(",", [for count in range(1, var.elasticsearch_counts + 1) : format("%q", "${var.basename}-${terraform.workspace}-elasticsearch-${count}.${var.domain_name}")])} ]"
+    kibana_elasticsearch_hosts = "[ ${join(",", [for count in range(1, var.elasticsearch_counts + 1) : format("%q", "http://${var.basename}-${terraform.workspace}-elasticsearch-${count}.${var.domain_name}:9200")])} ]"
   }
 }
 
 data "template_file" "user_data_elasticsearch" {
   template = file("${var.template_file_path}/elasticsearch.yml.tpl")
+  for_each = { for index, name in range(1, var.elasticsearch_counts + 1) : index => name }
 
   vars = {
     elastic_version                            = var.elastic_version
     elasticsearch_jvm_Xms                      = var.elasticsearch_jvm_Xms
     elasticsearch_jvm_Xmx                      = var.elasticsearch_jvm_Xmx
     elasticsearch_cluster_name                 = var.basename
-    elasticsearch_node_name                    = var.elasticsearch_node_name
+    elasticsearch_node_name                    = "${var.basename}-${terraform.workspace}-elasticsearch-${each.value}.${var.domain_name}"
     elasticsearch_network_host                 = "[ ${join(",", [for s in var.elasticsearch_network_host : format("%q", s)])} ]"
     elasticsearch_http_port                    = tostring(var.elasticsearch_http_port)
     elasticsearch_discovery_seed_hosts         = "[ ${join(",", [for count in range(1, var.elasticsearch_counts + 1) : format("%q", "${var.basename}-${terraform.workspace}-elasticsearch-${count}.${var.domain_name}")])} ]"

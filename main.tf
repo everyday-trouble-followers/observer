@@ -66,9 +66,9 @@ module "ec2" {
   kibana_server_name = var.kibana_server_name
 
   # elasticsearch
-  elasticsearch_jvm_Xms      = var.elasticsearch_jvm_Xms
-  elasticsearch_jvm_Xmx      = var.elasticsearch_jvm_Xmx
-  elasticsearch_node_name    = var.elasticsearch_node_name
+  elasticsearch_jvm_Xms = var.elasticsearch_jvm_Xms
+  elasticsearch_jvm_Xmx = var.elasticsearch_jvm_Xmx
+  #elasticsearch_node_name    = var.elasticsearch_node_name
   elasticsearch_network_host = var.elasticsearch_network_host
   elasticsearch_http_port    = var.elasticsearch_http_port
 

@@ -149,11 +149,11 @@ variable "elasticsearch_jvm_Xmx" {
   default     = "4g"
 }
 
-variable "elasticsearch_node_name" {
-  type        = string
-  description = "elasticsearch node name"
-  default     = "elasticsearch"
-}
+# variable "elasticsearch_node_name" {
+#   type        = string
+#   description = "elasticsearch node name"
+#   default     = "elasticsearch"
+# }
 
 variable "elasticsearch_network_host" {
   type        = list(string)
